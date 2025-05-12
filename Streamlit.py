@@ -32,15 +32,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# === DB Connection ===
+# === Secure DB Connection using secrets.toml ===
+sf = st.secrets["snowflake"]
+
 def get_connection():
     return snowflake.connector.connect(
-        user="RSYED",
-        password="9985226886@1877Rameez",  # Replace securely in production
-        account="SZAHDAU-AI68009",
-        warehouse="COMPUTE_WH",
-        database="RSYED",
-        schema="RAJA"
+        user=sf["user"],
+        password=sf["password"],
+        account=sf["account"],
+        warehouse=sf["warehouse"],
+        database=sf["database"],
+        schema=sf["schema"]
     )
 
 # === Load Data ===
